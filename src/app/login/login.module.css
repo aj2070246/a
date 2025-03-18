@@ -54,3 +54,8 @@
     color: red;
     margin-bottom: 15px;
   }
+  .captchaContainer {
+    position: relative;
+    width: 200px; /* یا هر اندازه‌ای که کپچا داره */
+    height: 50px;
+  }

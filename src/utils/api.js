@@ -1,10 +1,11 @@
 // src/utils/api.js
 
 // src/utils/api.js
+// const BASE_API = "http://localhost:5000";
 const BASE_API = "https://api.hamsaryar.com";
 
 // لیست متدهایی که هدر نمی‌خوان
-const NO_AUTH_ENDPOINTS = ["/publicData/getCaptcha", "admin/adminlogin"];
+const NO_AUTH_ENDPOINTS = [ "/publicData/getCaptcha", "admin/adminlogin" ];
 
 export const sendRequest = async (endpoint, options = {}, auth = {}) => {
   const isNoAuthEndpoint = NO_AUTH_ENDPOINTS.includes(endpoint);

@@ -44,7 +44,16 @@ export default function LoginPage() {
     <div className={styles.container}>
       <h1>ورود</h1>
       {error && <p className={styles.error}>{error}</p>}
-      {captchaImage && <Image src={captchaImage} alt="Captcha" className={styles.captcha} />}
+      {captchaImage &&
+        <div className={styles.captchaContainer}>
+          <Image
+            src={captchaImage}
+            alt="Captcha"
+            layout="fill"
+            className={styles.captcha}
+          />
+        </div>
+      }
       <form onSubmit={handleLogin} className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="userName">نام کاربری</label>
