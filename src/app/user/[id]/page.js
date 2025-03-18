@@ -107,6 +107,9 @@ export default function UserPage() {
 
                     <Link href={`/chat/${user.id}`} className={styles.button}>
                         شروع گفتگو
+                    </Link> 
+                     <Link href={`/update/${user.id}`} className={styles.button}>
+                        ویرایش کاربر
                     </Link>
                 </div>
             </div>

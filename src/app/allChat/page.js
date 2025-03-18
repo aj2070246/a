@@ -76,7 +76,7 @@ export default function ChatPage() {
                 <tbody>
                     {chats
                         .filter((chat) => chat && chat.id) // فقط چت‌هایی که id دارن
-                        .map((chat, index) => (
+                        .map((chat) => (
                             <tr key={chat.id}>
                                 <td>
                                     <Link href={`/chat/${chat.senderUserId}***${chat.receiverUserId}`}>

@@ -1,6 +1,6 @@
 // src/app/login/page.js
 "use client";
-
+import Image from 'next/image';
 import { useState, useEffect } from "react";
 import { sendRequest } from "../../utils/api";
 import { useRouter } from "next/navigation";
@@ -44,7 +44,7 @@ export default function LoginPage() {
     <div className={styles.container}>
       <h1>ورود</h1>
       {error && <p className={styles.error}>{error}</p>}
-      {captchaImage && <img src={captchaImage} alt="Captcha" className={styles.captcha} />}
+      {captchaImage && <Image src={captchaImage} alt="Captcha" className={styles.captcha} />}
       <form onSubmit={handleLogin} className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="userName">نام کاربری</label>

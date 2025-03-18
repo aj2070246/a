@@ -13,7 +13,7 @@ export default function ChatDetailPage() {
   const router = useRouter();
   const { chatIds } = useParams(); // مثلاً "2***1"
 
-  const fetchChat = async () => {
+  const fetchChat = useCallback  (async () => {
     try {
       const auth = JSON.parse(localStorage.getItem("auth") || "{}");
       if (!auth.token || !auth.id) {
@@ -40,17 +40,17 @@ export default function ChatDetailPage() {
         setError(err.message);
       }
     }
-  };
+  },[]);
 
   useEffect(() => {
     fetchChat();
-  }, [chatIds, router]);
+  }, [fetchChat]);
   // تابع برای دکمه اول - ارسال پیام از طرف ادمین
 
   const handleAdminMessage2 = async () => {
     try {
       const auth = JSON.parse(localStorage.getItem("auth") || "{}");
-      const [senderId, receiverId] = chatIds.split("***");
+      const [_, receiverId] = chatIds.split("***");
       const payload = { messageText, ReceiverUserId: receiverId };
       const response = await sendRequest("/admin/sendAdminMessage", {
         method: "POST",
@@ -58,6 +58,7 @@ export default function ChatDetailPage() {
       }, auth);
 
       if (response.isSuccess) {
+        
         setMessages([...messages, response.model]); // اضافه کردن پیام جدید به لیست
         setMessageText(""); // پاک کردن تکست‌باکس
         fetchChat();
@@ -69,7 +70,7 @@ export default function ChatDetailPage() {
   const handleAdminMessage = async () => {
     try {
       const auth = JSON.parse(localStorage.getItem("auth") || "{}");
-      const [senderId, receiverId] = chatIds.split("***");
+      const [senderId, _] = chatIds.split("***");
       const payload = { messageText, ReceiverUserId: senderId };
       const response = await sendRequest("/admin/sendAdminMessage", {
         method: "POST",
@@ -168,9 +169,9 @@ export default function ChatDetailPage() {
       <div className={styles.chatBox}>
         {messages
           .filter((message) => message && message.id) // فقط چت‌هایی که id دارن
-          .map((message, index) => (
+          .map((message) => (
             <div
-              key={index}
+              key={message.id}
               className={`${styles.message} ${message.senderUserId === senderId ? styles.sent : styles.received}`}
             >
               <Link href={`/user/${message.senderUserId}`} legacyBehavior>
